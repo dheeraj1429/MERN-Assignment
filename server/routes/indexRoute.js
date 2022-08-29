@@ -23,5 +23,6 @@ const upload = multer({ storage: storage }).any();
 
 // Api Route
 route.post("/upload", upload, indexControllers.uploadSingleProduct);
+route.get("/all-products", indexControllers.fetchAllProducts);
 
 module.exports = route;

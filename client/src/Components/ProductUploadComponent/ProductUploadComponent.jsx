@@ -7,6 +7,7 @@ import CustomButtonComponent from "../CustomButtonComponent/CustomButtonComponen
 import { useSelector, useDispatch } from "react-redux";
 import { message } from "antd";
 import { uploadSingleProduct } from "../../Redux/Actions/IndexAction";
+import { resetProductNotification } from "../../Redux/Actions/appAction";
 
 function ProductUploadComponent() {
     const File = useRef(null);
@@ -56,6 +57,7 @@ function ProductUploadComponent() {
     useEffect(() => {
         if (!!uploadProduct && uploadProduct.message) {
             info(uploadProduct.message);
+            dispatch(resetProductNotification(null));
         }
     }, [uploadProduct]);
 

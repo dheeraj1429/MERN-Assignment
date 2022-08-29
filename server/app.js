@@ -13,9 +13,10 @@ const databaseConnectionFunction = require("./model/db/db");
 const indexRoute = require("./routes/indexRoute");
 
 // middlewares
+// server upload folder static
+app.use(express.static(path.join(__dirname, "upload")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "upload")));
 app.use(logger());
 app.use(cors());
 app.use(helmet());

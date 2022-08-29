@@ -11,6 +11,13 @@ export const div = styled.div`
         color: var(--main-cl);
         border-radius: 10px;
     }
+    .know_more_button {
+        padding: 0.5rem 2rem;
+        background-color: var(--gray-cl);
+        color: var(--main-cl);
+        border-radius: 10px;
+        cursor: pointer;
+    }
 `;
 
 export const button = styled.button``;
