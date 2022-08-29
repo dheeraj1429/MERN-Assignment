@@ -1,0 +1,3 @@
+export const ACTION_TYPE = {
+    UPLOAD_PRODUCT: "UPLOAD_PRODUCT",
+};
