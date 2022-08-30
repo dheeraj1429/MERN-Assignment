@@ -12,6 +12,12 @@ export const div = styled.div`
     opacity: ${(props) => (props.show ? "1" : "0")};
 `;
 
+export const flexDiv = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
 export const sidebar = styled.div`
     position: fixed;
     right: ${(props) => (props.show ? "0px" : "-400px")};
@@ -27,4 +33,8 @@ export const sidebar = styled.div`
     .close_icon {
         font-size: 20px;
     }
+`;
+
+export const items = styled.div`
+    padding: 1rem 0;
 `;

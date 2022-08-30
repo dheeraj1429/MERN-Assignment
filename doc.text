@@ -1,0 +1,4 @@
+1 - run the npm run client and npm run server in your system.
+2 - replace the .env URL with your mongodb URL.
+3 - without login you can upload the product and see into the home page.
+4 - if user is login then user can be able to add the products into the cart, use able to use the cart sidebar, user can view the all basket products, and total price ..etc

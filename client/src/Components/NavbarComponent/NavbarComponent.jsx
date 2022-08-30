@@ -7,14 +7,16 @@ import CartSidebarComponent from "../CartSidebarComponent/CartSidebarComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { showSidebarComponet } from "../../Redux/Actions/appAction.js";
 import { AiOutlineUser } from "@react-icons/all-files/ai/AiOutlineUser";
+import { useCookies } from "react-cookie";
 
 function NavbarComponent() {
     const [NavLinks, setNavLinks] = useState([
         { elm: "Home", id: 1 },
         { elm: "Upload", id: 2 },
     ]);
-
+    const [cookie] = useCookies(["user"]);
     const user = useSelector((state) => state.auth.user);
+    const cart = useSelector((state) => state.index.cart);
 
     const dispatch = useDispatch();
 
@@ -37,12 +39,18 @@ function NavbarComponent() {
                                 </li>
                             </Link>
                         ))}
+                        {cookie && !!cookie.user ? (
+                            <li>
+                                <Badge
+                                    badgeContent={cart && !!cart.length ? cart.length : 0}
+                                    color="primary"
+                                    onClick={showSidebarHandler}
+                                >
+                                    <AiOutlineShoppingCart color="action" />
+                                </Badge>
+                            </li>
+                        ) : null}
 
-                        <li>
-                            <Badge badgeContent={1} color="primary" onClick={showSidebarHandler}>
-                                <AiOutlineShoppingCart color="action" />
-                            </Badge>
-                        </li>
                         {!!user ? (
                             <>
                                 <li>

@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { userSignInExists } from "./Redux/Actions/appAction";
 import { useDispatch } from "react-redux";
+import { fetchAllCartProduct } from "./Redux/Actions/IndexAction";
 
 // components
 import NavbarComponent from "./Components/NavbarComponent/NavbarComponent";
@@ -16,9 +17,11 @@ import SignIn from "./pages/SignIn/SignIn";
 function App() {
     const [cookie] = useCookies(["user"]);
     const dispatch = useDispatch();
+
     useEffect(() => {
         if (cookie && cookie.user) {
             dispatch(userSignInExists(cookie.user));
+            dispatch(fetchAllCartProduct());
         }
     }, [cookie]);
 

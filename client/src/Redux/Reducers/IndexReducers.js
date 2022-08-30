@@ -1,4 +1,5 @@
 import { ACTION_TYPE } from "../ActionType/ActionType";
+
 const INITAL_STATE = {
     uploadProduct: null,
     allProducts: [],
@@ -7,6 +8,18 @@ const INITAL_STATE = {
     deleteProductInfo: null,
     cart: [],
     showSidebar: false,
+};
+
+const groupProduct = function (cart, product) {
+    const exists = cart.find((el) => el.productId._id === product._id);
+
+    if (exists) {
+        return cart.map((el) =>
+            el.productId._id === product._id ? { ...el, qty: el.qty + 1 } : el
+        );
+    }
+
+    return [...cart, { productId: { ...product }, qty: 1 }];
 };
 
 const IndexReducer = function (state = INITAL_STATE, action) {
@@ -57,6 +70,18 @@ const IndexReducer = function (state = INITAL_STATE, action) {
             return {
                 ...state,
                 showSidebar: action.payload,
+            };
+
+        case ACTION_TYPE.GET_ALL_CART_PRODUCTS:
+            return {
+                ...state,
+                cart: action.payload,
+            };
+
+        case ACTION_TYPE.ADD_TO_CARD:
+            return {
+                ...state,
+                cart: groupProduct(state.cart, action.payload),
             };
 
         default:

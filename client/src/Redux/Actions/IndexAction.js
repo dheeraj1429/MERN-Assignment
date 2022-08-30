@@ -83,12 +83,34 @@ export const deleteSingleProduct = function (data) {
     };
 };
 
-export const addToCardItems = function (data) {
+export const addToCardItems = function (data, productData) {
     return async function (dispatch) {
         try {
             const addProductIntoCart = await axios.post(`/add-product-into-cart/${data}`, headers);
 
-            console.log(addProductIntoCart);
+            if (addProductIntoCart && addProductIntoCart?.data) {
+                dispatch({
+                    type: ACTION_TYPE.ADD_TO_CARD,
+                    payload: productData,
+                });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+};
+
+export const fetchAllCartProduct = function () {
+    return async function (dispatch) {
+        try {
+            const cardProducts = await axios.get("/get-all-cards-products", headers);
+
+            if (cardProducts && cardProducts?.data) {
+                dispatch({
+                    type: ACTION_TYPE.GET_ALL_CART_PRODUCTS,
+                    payload: cardProducts && cardProducts?.data?.cart,
+                });
+            }
         } catch (err) {
             console.log(err);
         }

@@ -30,5 +30,6 @@ route.get("/get-selected-product/:id", indexControllers.fetchSelectedProduct);
 route.patch("/update-product-data", upload, indexControllers.updateProductInfo);
 route.delete("/delete-selected-product/:id", indexControllers.deleteSingleProduct);
 route.post("/add-product-into-cart/:id", indexControllers.addProductIntoCart);
+route.get("/get-all-cards-products", indexControllers.getCartProducts);
 
 module.exports = route;

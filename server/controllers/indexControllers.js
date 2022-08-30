@@ -218,8 +218,6 @@ const addProductIntoCart = async function (req, res, next) {
                     { $inc: { "cart.$.qty": 1 } }
                 );
 
-                console.log(findUserAndInsertProduct);
-
                 if (!!findUserAndInsertProduct.modifiedCount) {
                     return res.status(200).json({
                         success: true,
@@ -250,6 +248,31 @@ const addProductIntoCart = async function (req, res, next) {
     }
 };
 
+const getCartProducts = async function (req, res, next) {
+    try {
+        const userFindInCookie = await req.cookies.user;
+
+        if (!userFindInCookie) {
+            return res.status(200).json({
+                message: "there is no user in session",
+            });
+        } else {
+            const { id } = userFindInCookie;
+
+            const getAllCartProducts = await userModel
+                .findOne({ _id: id })
+                .populate("cart.productId");
+
+            return res.status(200).json({
+                success: true,
+                cart: getAllCartProducts.cart,
+            });
+        }
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 module.exports = {
     uploadSingleProduct,
     fetchAllProducts,
@@ -257,4 +280,5 @@ module.exports = {
     updateProductInfo,
     deleteSingleProduct,
     addProductIntoCart,
+    getCartProducts,
 };
