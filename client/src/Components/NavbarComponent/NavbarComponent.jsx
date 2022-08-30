@@ -39,7 +39,7 @@ function NavbarComponent() {
                                 </li>
                             </Link>
                         ))}
-                        {cookie && !!cookie.user ? (
+                        {!!user ? (
                             <li>
                                 <Badge
                                     badgeContent={cart && !!cart.length ? cart.length : 0}
