@@ -2,6 +2,11 @@ import { ACTION_TYPE } from "../ActionType/ActionType";
 const INITAL_STATE = {
     uploadProduct: null,
     allProducts: [],
+    selectedProduct: null,
+    udpateProductInfo: null,
+    deleteProductInfo: null,
+    cart: [],
+    showSidebar: false,
 };
 
 const IndexReducer = function (state = INITAL_STATE, action) {
@@ -23,6 +28,37 @@ const IndexReducer = function (state = INITAL_STATE, action) {
                 ...state,
                 allProducts: action.payload,
             };
+
+        case ACTION_TYPE.FETCH_SELECTED_PRODUCT:
+            return {
+                ...state,
+                selectedProduct: action.payload,
+            };
+
+        case ACTION_TYPE.UDPATE_PRODUCT:
+            return {
+                ...state,
+                udpateProductInfo: action.payload,
+            };
+
+        case ACTION_TYPE.RESET_UPDATE_INFO:
+            return {
+                ...state,
+                udpateProductInfo: action.payload,
+            };
+
+        case ACTION_TYPE.DELETE_SELECTED_PRODUCT:
+            return {
+                ...state,
+                deleteProductInfo: action.payload,
+            };
+
+        case ACTION_TYPE.SHOW_SIDEBAR_COMPONENT:
+            return {
+                ...state,
+                showSidebar: action.payload,
+            };
+
         default:
             return {
                 ...state,

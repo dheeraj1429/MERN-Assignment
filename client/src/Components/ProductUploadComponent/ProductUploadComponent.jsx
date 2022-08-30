@@ -2,12 +2,12 @@ import React, { useRef, useState, useEffect } from "react";
 import * as upload from "./ProductUploadComponent.style";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { AiOutlineFileAdd } from "@react-icons/all-files/ai/AiOutlineFileAdd";
 import CustomButtonComponent from "../CustomButtonComponent/CustomButtonComponent";
 import { useSelector, useDispatch } from "react-redux";
 import { message } from "antd";
 import { uploadSingleProduct } from "../../Redux/Actions/IndexAction";
 import { resetProductNotification } from "../../Redux/Actions/appAction";
+import FileUploadComponent from "../FileUploadComponent/FileUploadComponent";
 
 function ProductUploadComponent() {
     const File = useRef(null);
@@ -90,20 +90,12 @@ function ProductUploadComponent() {
                     variant="outlined"
                 />
             </Box>
-
-            <upload.file onClick={OpenFileHandler}>
-                <div>
-                    <p>{Product.image.name}</p>
-                    <AiOutlineFileAdd />
-                </div>
-                <input
-                    type="file"
-                    onChange={ChangeFileHandler}
-                    name="image"
-                    ref={(el) => (File.current = el)}
-                />
-            </upload.file>
-
+            <FileUploadComponent
+                openFunction={OpenFileHandler}
+                file={File}
+                paraText={Product.image.name}
+                changeFunction={ChangeFileHandler}
+            />
             <CustomButtonComponent
                 InnerText={"Upload Product"}
                 btnCl={"Uplod_button"}

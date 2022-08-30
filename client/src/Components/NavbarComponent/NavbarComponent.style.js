@@ -22,4 +22,11 @@ export const nav = styled.div`
     .active {
         color: var(--button-cl);
     }
+
+    ul li svg {
+        font-size: 22px;
+    }
+    a {
+        color: var(--dark-cl);
+    }
 `;

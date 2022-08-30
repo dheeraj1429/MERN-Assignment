@@ -14,7 +14,9 @@ const storage = multer.diskStorage({
         }
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+        if (file) {
+            cb(null, file.originalname);
+        }
     },
 });
 
@@ -24,5 +26,9 @@ const upload = multer({ storage: storage }).any();
 // Api Route
 route.post("/upload", upload, indexControllers.uploadSingleProduct);
 route.get("/all-products", indexControllers.fetchAllProducts);
+route.get("/get-selected-product/:id", indexControllers.fetchSelectedProduct);
+route.patch("/update-product-data", upload, indexControllers.updateProductInfo);
+route.delete("/delete-selected-product/:id", indexControllers.deleteSingleProduct);
+route.post("/add-product-into-cart/:id", indexControllers.addProductIntoCart);
 
 module.exports = route;
